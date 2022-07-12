@@ -1,1 +1,1 @@
-web: bin\myapp.exe
+web: bin\myapp
