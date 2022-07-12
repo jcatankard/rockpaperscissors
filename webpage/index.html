@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Rock, Paper, Scissors</h1>
+        <hr>
+        <button type="button" class="btn btn-dark btn-lg btn-block" onclick="new_game()">Start new game</button>
+        <hr>
+        <p id="player_score">&nbsp;</p>
+        <p id="computer_score">&nbsp;</p>
+        <hr>
+        <p>Choose rock, paper or scissors!</p>
+        <button class="btn btn-outline-secondary" onclick="choose('rock')">Rock</button>
+        <button class="btn btn-outline-danger" onclick="choose('paper')">Paper</button>
+        <button class="btn btn-outline-success" onclick="choose('scissors')">Scissors</button>
+        <hr>
+        <p id="player_choice">&nbsp;</p>
+        <p id="computer_choice">&nbsp;</p>
+        <p class="text-danger" id="round_result">&nbsp;</p>
+        <hr>
+        <br>
+        <a class="btn btn-primary" href="https://en.wikipedia.org/wiki/Rock_paper_scissors" target="_blank" role="button">Wikipedia</a>
+
+    </div>
+</body>
+<script>
+    function choose(x) {
+        fetch("/play?c=" + x)
+        .then(response => response.json())
+        .then(data => {
+            if (x == 'rock') {
+                document.getElementById("player_choice").innerHTML = "You chose rock";
+            } else if (x=='paper') {
+                document.getElementById("player_choice").innerHTML = "You chose paper";
+            } else if (x=='scissors') {
+                document.getElementById("player_choice").innerHTML = "You chose scissors";
+            }
+        document.getElementById("computer_choice").innerHTML = "Computer chose " + data.computer_choice;
+        document.getElementById("round_result").innerHTML = data.round_result;
+
+        update_scores()
+    })
+    }
+
+    function update_scores() {
+        fetch("/updatescores")
+        .then(response => response.json())
+        .then(data => {
+        document.getElementById("player_score").innerHTML = "Player score " + data.player_score;
+        document.getElementById("computer_score").innerHTML =  "Computer score " + data.computer_score;
+    })
+    }
+
+    function new_game() {
+        document.getElementById("player_choice").innerHTML = "&nbsp;";
+        document.getElementById("computer_choice").innerHTML = "&nbsp;";
+        document.getElementById("round_result").innerHTML = "&nbsp;";
+
+        fetch("/newgame")
+        update_scores()
+    }
+</script>
+</html>
