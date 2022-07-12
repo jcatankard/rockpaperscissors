@@ -4,6 +4,7 @@ import (
 	"log"
 	"myapp/webpage"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -13,6 +14,8 @@ func main() {
 	http.HandleFunc("/play", webpage.PlayRound)
 	http.HandleFunc("/", webpage.HomePage)
 
-	log.Println("starting web server on port 8080")
-	http.ListenAndServe(":8080", nil)
+	port := os.Getenv("PORT")
+	// port = ":8080"
+	log.Printf("starting web server on port %s\n", port)
+	http.ListenAndServe(port, nil)
 }
