@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/heroku/rockpaperscissorstestproject/rps"
+	"myapp/rps"
 )
 
 // HomePage renders the home page on launch

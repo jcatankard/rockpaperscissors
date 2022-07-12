@@ -1,12 +1,11 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 
-	"github.com/heroku/rockpaperscissorstestproject/webpage"
-
-	"github.com/gin-gonic/gin"
+	"myapp/webpage"
 )
 
 func main() {
@@ -16,19 +15,11 @@ func main() {
 	http.HandleFunc("/play", webpage.PlayRound)
 	http.HandleFunc("/", webpage.HomePage)
 
-	// port := ":8080"
-	// log.Printf("starting web server on port %s\n", port)
-	// http.ListenAndServe(port, nil)
-
 	port := os.Getenv("PORT")
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
+	if port == "" {
+		port = "8080"
+	}
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	})
-
-	router.Run(":" + port)
+	log.Printf("starting web server on port %s\n", port)
+	http.ListenAndServe(":"+port, nil)
 }

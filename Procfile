@@ -1,1 +1,1 @@
-web: bin\rockpaperscissorstestproject
+web: bin\myapp
