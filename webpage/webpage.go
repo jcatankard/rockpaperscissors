@@ -3,9 +3,10 @@ package webpage
 import (
 	"encoding/json"
 	"log"
-	"myapp/rps"
 	"net/http"
 	"text/template"
+
+	"github.com/heroku/rockpaperscissorstestproject/rps"
 )
 
 // HomePage renders the home page on launch

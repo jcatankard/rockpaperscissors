@@ -1,4 +1,4 @@
-module myapp
+module github.com/heroku/rockpaperscissorstestproject
 
 go 1.18
 

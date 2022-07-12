@@ -1,9 +1,10 @@
 package main
 
 import (
-	"myapp/webpage"
 	"net/http"
 	"os"
+
+	"github.com/heroku/rockpaperscissorstestproject/webpage"
 
 	"github.com/gin-gonic/gin"
 )
