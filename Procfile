@@ -1,1 +1,1 @@
-web: bin\rockpaperscissors.exe
+web: bin\myapp.exe
