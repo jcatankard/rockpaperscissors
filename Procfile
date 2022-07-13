@@ -1,1 +1,1 @@
-web: rockpaperscissors
+web: myapp
